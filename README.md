@@ -1,5 +1,17 @@
-# psychic-rotary-phone
+## Table of contents
+* [General info](#general-info)
+* [Setup](#setup)
 
+## General info
 Creating production ready focalboard docker files.
+	
+## Setup
+To run this project you can clone repo and execute docker-compose:
 
-obviously you will not push secrets file into any public git repo "focalboard-db.txt" when deploying please use .gitignore
+```
+$ mkdir focalboard && cd focalboard
+$ git clone https://github.com/st-dav/psychic-rotary-phone.git
+$ docker-compose up -d
+```
+
+
