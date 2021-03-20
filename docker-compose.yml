@@ -14,7 +14,7 @@ services:
       - POSTGRES_PASSWORD=boardsuser-password
       - POSTGRES_DB=boards
     volumes:
-    - "./data:/var/lib/postgresql/data"
+    - "/opt/postgresql/focalboard/data:/var/lib/postgresql/data"
 
   focalboard:
     build: 

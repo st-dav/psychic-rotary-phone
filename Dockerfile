@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:21.04
 
 # Make sure that the underlying container is patched to the latest versions
 RUN apt update && \
