@@ -4,7 +4,7 @@ services:
   focalboard-db:
     image: postgres:13.2
     healthcheck:
-      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "boardsuser" ]
+      test: [ "CMD", "pg_isready", "-q", "-d", "boards", "-U", "boardsuser" ]
       timeout: 45s
       interval: 10s
       retries: 10
