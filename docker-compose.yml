@@ -28,7 +28,7 @@ services:
       - VIRTUAL_HOST=focalboard.local
       - VIRTUAL_PORT=8000
     user: focalboard
-    command: sh -c "/opt/focalboard/bin/focalboard-server"
+    command: /opt/focalboard/bin/focalboard-server
     volumes:
       - "./config.json:/opt/focalboard/config.json"
 
