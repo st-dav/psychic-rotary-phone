@@ -1,0 +1,34 @@
+version: "3.7"
+
+services: 
+  focalboard-db:
+    image: postgres:13.2
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "boardsuser" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    environment:
+      - POSTGRES_USER=boardsuser
+      - POSTGRES_PASSWORD=boardsuser-password
+      - POSTGRES_DB=boards
+    volumes:
+    - "./data:/var/lib/postgresql/data"
+
+  focalboard:
+    build: 
+      context: .
+    depends_on:
+      - "focalboard-db"
+    container_name: focalboard
+    ports:
+      - 8000:8000
+    environment:
+      - VIRTUAL_HOST=focalboard.local
+      - VIRTUAL_PORT=8000
+    user: focalboard
+    command: sh -c "/opt/focalboard/bin/focalboard-server"
+    volumes:
+      - "./config.json:/opt/focalboard/config.json"
+
