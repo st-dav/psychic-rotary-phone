@@ -10,11 +10,13 @@ services:
       retries: 10
     restart: always
     environment:
-      - POSTGRES_USER=boardsuser
-      - POSTGRES_PASSWORD=boardsuser-password
-      - POSTGRES_DB=boards
+      - POSTGRES_USER_FILE=/run/secrets/focalboard-db
+      - POSTGRES_PASSWORD_FILE=/run/secrets/focalboard-db
+      - POSTGRES_DB_FILE=/run/secrets/focalboard-db
     volumes:
     - "/opt/postgresql/focalboard/data:/var/lib/postgresql/data"
+    secrets:
+      - focalboard-db
 
   focalboard:
     build: 
@@ -31,4 +33,7 @@ services:
     command: /opt/focalboard/bin/focalboard-server
     volumes:
       - "./config.json:/opt/focalboard/config.json"
+secrets:
+  focalboard-db:
+    file: "./focalboard-db.txt"
 
