@@ -9,14 +9,17 @@ services:
       interval: 10s
       retries: 10
     restart: always
+    ports:
+      - 5432:5432
     environment:
-      - POSTGRES_USER_FILE=/run/secrets/focalboard-db
-      - POSTGRES_PASSWORD_FILE=/run/secrets/focalboard-db
-      - POSTGRES_DB_FILE=/run/secrets/focalboard-db
+      - POSTGRES_USER_FILE=/run/secrets/db_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db_passwd
+      - POSTGRES_DB=boards
     volumes:
-    - "/opt/postgresql/focalboard/data:/var/lib/postgresql/data"
+      - "/opt/postgresql/focalboard/data:/var/lib/postgresql/data"
     secrets:
-      - focalboard-db
+      - db_user
+      - db_passwd
 
   focalboard:
     build: 
@@ -33,7 +36,9 @@ services:
     command: /opt/focalboard/bin/focalboard-server
     volumes:
       - "./config.json:/opt/focalboard/config.json"
-secrets:
-  focalboard-db:
-    file: "./focalboard-db.txt"
 
+secrets:
+  db_user:
+    file: ./focal_db_user.txt
+  db_passwd:
+    file: ./focal_db_passwd.txt

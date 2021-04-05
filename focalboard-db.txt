@@ -1,3 +1,0 @@
-POSTGRES_USER=boardsuser
-POSTGRES_PASSWORD=boardsuser-password
-POSTGRES_DB=boards
